@@ -11,17 +11,17 @@
     * At least one container is still running
 3. Succeeded
     * All containers in the pod have successfully exited
-    * No one has restarted
+    * Any container won't restart
 4. Failed
     * All the containers have terminated
     * But at least one container has terminated with failure
 5. Unknown
     * Pod state can't be obtained
-    * Typically, occurs due to a communication error
+    * Typically, occurs due to communication errors
 
 > [!Important]
-> `Status` field in the `kubectl` output isn't pod status
-> It shows more user-friendly output
+> * `Status` field in the `kubectl` output isn't pod status
+> * It shows more user-friendly output
 
 ## Container states
 
@@ -35,8 +35,10 @@
 
 ## Pod conditions
 
-* Array of boolean variables
+* Pod has a pod status
+* Pod status has an array of boolean variables named `pod conditions`
 
+Pod conditions:
 1. PodScheduled
     * Pod has been scheduled to a node
 2. PodReadyToStartContainers
