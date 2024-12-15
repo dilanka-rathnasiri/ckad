@@ -112,6 +112,10 @@ livenessProbe:
       - /tmp/healthy
 ```
 
+* Commands should be given in array format
+  e.g., * wrong => cat /tmp/healthy
+        * correct => ["cat", "/tmp/healthy"]
+
 2. grpc
 
 ```yaml
