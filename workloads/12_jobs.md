@@ -39,6 +39,8 @@ spec:
     * If unset
         * Non-relevant for parallel jobs with work queue
         * For other job types, default value: 1
+    * If 0 => no pod will run
+    * Optional
 * `spec.parallelism`
     * Count of parallel jobs
     * Non-negative integer
@@ -46,21 +48,25 @@ spec:
     * If unset => default value : 1
     * If 0 => Job is effectively paused
         * Manually need to change the `parallelism` value to resume the job
+    * Optional
 * `spec.template`
     * pods' template
+    * Required
 * `spec.restartPolicy`
-    * How to handle the restart of the pod
+    * How to handle the restarting of the pod
     * Only can be =>
         * `Never`
             * If the pod fails => whole pod will restart
         * `OnFailure`
             * If the pod fails => only failed containers inside the pod will restart
             * Pod stays on the node
+    * Required
 * `spec.ttlSecondsAfterFinished`
    * Time in seconds to clean the completed pods
-   * Time starts from the pod completion
+   * Time starts for counting from the pod's completion
    * If 0 => clean up immediately after a pod's completion
    * If unset => never cleans up the completed pods
+   * Optional
 
 ## Job types
 
