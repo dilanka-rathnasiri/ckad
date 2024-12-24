@@ -67,6 +67,10 @@ spec:
    * If 0 => clean up immediately after a pod's completion
    * If unset => never cleans up the completed pods
    * Optional
+* `spec.backoffLimit`
+  * Count of retries if pod fails
+  * Default: 6
+  * Optional
 
 ## Job types
 
