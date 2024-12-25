@@ -1,13 +1,28 @@
 # Deployment Strategies
 
+* We can change the deployment strategy by changing `spec.strategy.type` in the deployment manifest file
 * 2 strategies:
   * Recreate strategy
     * First, destroy all the old version's pods completely and then create the new version's pods
   * Rolling update strategy
     * Replace the old version's pods one by one with the new version's pods
     * Default strategy
-
-* We can change the deployment strategy by changing `spec.strategy.type` in the deployment manifest file
+    * Max unavailable
+  * The maximum number of pods that can be unavailable during the update process
+  * In manifest file => `spec.strategy.rollingUpdate.maxUnavailable`
+  * Can be percentage or a non-negative integer
+  * Default => 25%
+  * Optional field
+  * If note set => default: 25%
+    * Max surge
+  * The maximum number of pods that can be created over the desired pods count
+  * In manifest file => `spec.strategy.rollingUpdate.maxSurge`
+  * Can be percentage or a non-negative integer
+  * Default => 25%
+  * Optional field
+  * If not set => default: 25%
+    * Only one can be 0 from maxUnavailable and maxSurge
+    * Also, both values can be positive integers or percentages
 
 ## Important `kubectl` commands
 
