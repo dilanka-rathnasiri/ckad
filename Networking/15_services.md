@@ -50,3 +50,7 @@ spec:
     * Port specify for the outside of the cluster
     * Only available for NodePort type
     * Optional
+
+## Special Services
+
+* All the Kubernetes cluster has a ClusterIp service named `Kubernetes` by default
