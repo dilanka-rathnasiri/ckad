@@ -11,14 +11,15 @@
 * Limit => Max resources value
     * Can't exceed limit
 * (Request value) <= (Limit)
-* By default, no requests values or limits for any pod in Kubernetes
+* By default, no requests values or limits for any object in Kubernetes
     * So, pod or container can consume all the resources of the cluster
 * When only the limit is specified, but no requests values => requests value = limit
 * When the pod or container exceeds the cpu limit => cpu starts to throttle
 * When the pod or container exceeds the memory => Out of Memory (OOM) error
     * The pod or container will be killed
+    * Reason will be `OOMKilled`
 
-## Define Resource Requirements In The Manifest File
+## Define Resource Requirements In Manifest File
 
 Container wise:
 
@@ -87,7 +88,7 @@ spec:
 * Limit Ranges are namespace bounded
 * Creating or updating LimitRange only affects new pods
     * It doesn't affect existing resources
-* Limit Ranges block creating resources with violating the defined limits
+* Limit Ranges block creating resources with violating the defined constraints
 
 ## Limit Range Manifest File
 
@@ -123,8 +124,8 @@ spec:
 
 * Resource Quotas enforce constraints for aggregated resource consumption
 * Can create constraints for
-  * Compute Resources
-  * Count of objects
+    * Compute Resources
+    * Count of objects
 * Resource Quotas are namespace bounded
 
 ## Resource Quota Manifest File
@@ -144,3 +145,5 @@ spec:
 ```
 
 * Aggregated resource consumption can't exceed `car-quota` Resource Quota's hard limits
+* If a limit is set => that limit should be set for all the resources
+    * If `requests.memory` is set => `requests.memory` should be set for all the resources
