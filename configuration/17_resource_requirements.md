@@ -84,7 +84,7 @@ spec:
     * Enforce min and max storage requests per a Persistent Volume Claim
     * Enforce a ratio between requests and limit for a resource
     * Set default requests and limit for resources
-* Limit Range is a namespace bounded
+* Limit Ranges are namespace bounded
 * Creating or updating LimitRange only affects new pods
     * It doesn't affect existing resources
 * Limit Ranges block creating resources with violating the defined limits
@@ -121,4 +121,26 @@ spec:
 
 ## Resource Quota
 
-* Apply for the namespace
+* Resource Quotas enforce constraints for aggregated resource consumption
+* Can create constraints for
+  * Compute Resources
+  * Count of objects
+* Resource Quotas are namespace bounded
+
+## Resource Quota Manifest File
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: car-quota
+  namespace: car-ns
+spec:
+  hard:
+    requests.cpu: "1000m"
+    requests.memory: "2000Mi"
+    limits.cpu: "1500m"
+    limits.memory: "2500Mi"
+```
+
+* Aggregated resource consumption can't exceed `car-quota` Resource Quota's hard limits
