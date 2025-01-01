@@ -5,7 +5,7 @@
 * Tolerations are applied to pods
 * Tolerations allow the scheduler to schedule pods with matching taints
 * Taints and tolerations don't ensure pod placement in a specific node
-* Taints and tolerations only block the unwanted pods from placing on the node
+* Taints and tolerations can only block the unwanted pods from placing on the node
 * Kubernetes master node has a taint for preventing placing pods on the master node
 
 ## Taint Effects
