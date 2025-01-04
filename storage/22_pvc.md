@@ -27,31 +27,69 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: block-pv
+    name: pv-vol1
 spec:
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  volumeMode: Block
-  persistentVolumeReclaimPolicy: Retain
-  fc:
-    targetWWNs: ["50060e801049cfd1"]
-    lun: 0
-    readOnly: false
+    accessModes:
+      - ReadWriteOnce
+    persistentVolumeReclaimPolicy: Retain
+    capacity:
+        storage: 1Gi
+    awsElasticBlockStore:
+        volumeID: {{volume-id}}
+        fsType: ext4
 ```
 
-## Access Modes in Persistent Volumes
+## Key Fields In Persistent Volume Manifest File
 
-* 4 types
-  * ReadWriteOnce
-    * Only one node can mount the volume as read and write
-    * Pods are in the same node can access the volume
-  * ReadOnlyMany
-    * Many nodes can mount the volumes as read-only
-  * ReadWriteMany
-    * Many nodes can mount the volume as read and write
-  * ReadWriteOncePod
-    * Only one pod can mount the volume as read and write
-    * Even the pods in the same node can't mount the volume at the same time
-* The access mode capabilities are different from one storage type to another
+* `spec.accessModes`
+  * The access mode capabilities are different from one storage type to another
+  * Valid values:
+    * ReadWriteOncePod (**Most Commonly used**)
+      * Only one pod can mount the volume as read and write
+      * Even the pods in the same node can't mount the volume at the same time
+    * ReadWriteOnce
+      * Only one node can mount the volume as read and write
+      * Pods are in the same node can mount the volume
+    * ReadOnlyMany
+      * Many nodes can mount the volumes as read-only
+    * ReadWriteMany
+      * Many nodes can mount the volume as read and write
+* `spec.persistentVolumeReclaimPolicy`
+  * What happens to the Persistent Volume after deleting the PVC
+  * Values:
+    * Retain:
+      * Keep the Persistent Volume
+      * Keep the data
+    * Delete:
+      * Delete the Persistent Volume
+      * Also, delete the data
+    * Recycle:
+      * Keep the Persistent Volume
+      * But delete the data
+
+## Persistent Volume Claims
+
+* PVC (Persistent Volume Claim) is used to mound a Persisted Volume to a Pod
+* When PVCs look for a volume to bind:
+  * (PVC storage size) <= (Volume storage size)
+  * A PVC finds the most suitable volume to bind
+  * If no suitable volume => PVC's status will be `pending`
+  * If we want a specific volume to bound => We can use `labels` and `selectors`
+
+## PVC Manifest File
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: car-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce # refer Persistent Volume's spec.accessModes
+  resources:
+    requests:
+      storage: 500Mi
+  selector:
+    matchLabels:
+      release: "stable"
+```
