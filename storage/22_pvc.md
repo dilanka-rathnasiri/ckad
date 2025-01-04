@@ -66,6 +66,7 @@ spec:
     * Recycle:
       * Keep the Persistent Volume
       * But delete the data
+  * Default value: `Retain`
 
 ## Persistent Volume Claims
 
