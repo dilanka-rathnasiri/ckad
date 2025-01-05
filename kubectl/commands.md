@@ -4,6 +4,7 @@
 | `kubectl top pod`                                          | Display resource usage of pods         |
 | `kubectl get pod --selector {{label key}}={{label value}}` | Get matching pods for the given labels |
 | `kubectl get all`                                          | Get all resources                      |
+| `kubctl exec {{pod name}} -- {{command}}`                  | Execute a command inside a pod         |
 
 * `--dry-run=client` option
     * Only preview the changes

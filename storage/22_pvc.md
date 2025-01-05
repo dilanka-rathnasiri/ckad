@@ -1,6 +1,6 @@
 # Persistent Volume Claims
 
-## Mount A Volumes To Pod
+## Mount A Volume To A Pod
 
 ```yaml
 apiVersion: v1
@@ -10,16 +10,14 @@ metadata:
 spec:
   containers:
     - name: app
-      image: busybox:latest
-      command: [ "ls", "/etc/app-config" ]
+      image: nginx:latest
       volumeMounts:
-        - name: config
-          mountPath: "/etc/app-config"
-          readOnly: true
+        - name: vol
+          mountPath: /log
   volumes:
-    - name: config
-      configMap:
-        name: car-configmap
+    - name: vol
+      hostPath:
+        path: /var/log
 ```
 ## Persistent Volume Manifest File
 
@@ -27,7 +25,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-    name: pv-vol1
+    name: pv-vol
 spec:
     accessModes:
       - ReadWriteOnce
@@ -44,38 +42,46 @@ spec:
 * `spec.accessModes`
   * The access mode capabilities are different from one storage type to another
   * Valid values:
-    * ReadWriteOncePod (**Most Commonly used**)
-      * Only one pod can mount the volume as read and write
-      * Even the pods in the same node can't mount the volume at the same time
-    * ReadWriteOnce
-      * Only one node can mount the volume as read and write
-      * Pods are in the same node can mount the volume
-    * ReadOnlyMany
+    * `ReadWriteOncePod` (**Most Commonly used**)
+      * Volume can be mounted only to one pod as read and write
+      * Volume can't be mounted even for the pods in the same node
+    * `ReadWriteOnce`
+      * Volume can be mounted only to one node as read and write
+      * Volume can be mounted to multiple Pods in the same node
+    * `ReadOnlyMany`
       * Many nodes can mount the volumes as read-only
-    * ReadWriteMany
+    * `ReadWriteMany`
       * Many nodes can mount the volume as read and write
 * `spec.persistentVolumeReclaimPolicy`
-  * What happens to the Persistent Volume after deleting the PVC
+  * What happens to the Persistent Volume after deleting the PVC (Persistent Volume Claim)
   * Values:
-    * Retain:
-      * Keep the Persistent Volume
+    * `Retain`:
+      * Keep the PV
       * Keep the data
-    * Delete:
+      * After deleting PVC, PV won't be available
+        * PV's status will be `Released`
+        * Has to manually reclaim the volume
+    * `Delete`:
       * Delete the Persistent Volume
       * Also, delete the data
-    * Recycle:
+    * `Recycle`:
       * Keep the Persistent Volume
       * But delete the data
+      * After deleting PVC, PV will be available
   * Default value: `Retain`
 
 ## Persistent Volume Claims
 
 * PVC (Persistent Volume Claim) is used to mound a Persisted Volume to a Pod
-* When PVCs look for a volume to bind:
-  * (PVC storage size) <= (Volume storage size)
-  * A PVC finds the most suitable volume to bind
-  * If no suitable volume => PVC's status will be `pending`
+* When PVCs look for a PV to bind:
+  * (PVC storage size) <= (PV storage size)
+  * A PVC finds the most suitable PV to bind
+  * If no suitable PV => PVC's status will be `pending`
   * If we want a specific volume to bound => We can use `labels` and `selectors`
+  * Both PV and PVC should have the same access modes
+* After bounding PV to PVC, PVC's available capacity will be PV size
+* When deleting PVC =>
+  * If a Pod still uses PVC => PVC will be stuck in `terminating` state
 
 ## PVC Manifest File
 
