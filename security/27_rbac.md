@@ -75,3 +75,15 @@ roleRef:
   * Check access
   * If the user isn't given => Current user will be considered
   * If the namespace isn't given => Current namespace will be considered
+
+## Cluster Role Manifest File
+
+* Same as Role
+* No namespace
+* Kind is `ClusterRole`
+
+## Cluster Role Binding Manifest File
+
+* Same as Role Binding
+* No namespace
+* Kind is `ClusterRoleBinding`

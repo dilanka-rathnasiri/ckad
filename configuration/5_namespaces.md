@@ -9,6 +9,9 @@
   * eg: pods, services, deployments, etc.
 * But some Kubernetes resources aren't in any namespace
   * eg: nodes, persistent volumes, namespace, etc.
+* So, there are 2 types of Kubernetes objects:
+  * Namespace scoped resources
+  * Cluster scoped resources
 
 ## Initial Namespaces
 
