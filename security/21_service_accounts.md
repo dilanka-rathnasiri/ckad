@@ -35,10 +35,10 @@ kubectl create serviceaccocunt {{service account name}}
 ## Service Account Manifest file
 
 ```yaml
-  apiVersion: v1
-  kind: ServiceAccount
-  metadata:
-    name: build-robot
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: build-robot
 ```
 
 ## Default Service Accounts
