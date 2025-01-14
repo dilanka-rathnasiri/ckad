@@ -1,12 +1,12 @@
-| Command                                                           | Description                            |
-|-------------------------------------------------------------------|----------------------------------------|
-| `kubectl top node`                                                | Display resource usage of nodes        |
-| `kubectl top pod`                                                 | Display resource usage of pods         |
-| `kubectl get pod --selector {{label key}}={{label value}}`        | Get matching pods for the given labels |
-| `kubectl get all`                                                 | Get all resources                      |
-| `kubctl exec {{pod name}} -- {{command}}`                         | Execute a command inside a pod         |
-| `kubectl describe pod -n kube-system kube-apiserver-controlplane` | View Kube API Server details           |
-| `kubectl api-resources --namespaced={{true/false}}`               | List all resources                     |
+| Task                                   | Command                                                           |
+|----------------------------------------|-------------------------------------------------------------------|
+| Display resource usage of nodes        | `kubectl top node`                                                |
+| Display resource usage of pods         | `kubectl top pod`                                                 |
+| Get matching pods for the given labels | `kubectl get pod --selector {{label key}}={{label value}}`        |
+| Get all resources                      | `kubectl get all`                                                 |
+| Execute a command inside a pod         | `kubctl exec {{pod name}} -- {{command}}`                         |
+| View Kube API Server details           | `kubectl describe pod -n kube-system kube-apiserver-controlplane` |
+| List all resources                     | `kubectl api-resources --namespaced={{true/false}}`               |
 
 * `--dry-run=client` option
     * Only preview the changes
