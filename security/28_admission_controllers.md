@@ -39,3 +39,9 @@ kube-apiserver --disable-admission-plugins=PodNodeSelector,AlwaysDeny
 ```shell
 kube-apiserver -h | grep enable-admission-plugins
 ```
+
+or
+
+```shell
+ps -ef | grep kube-apiserver | grep admission-plugins
+```
