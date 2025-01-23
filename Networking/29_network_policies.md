@@ -16,20 +16,25 @@ spec:
   - Ingress
   - Egress
   ingress: # `Ingress` should be in `spec.policyTypes` fields for enabling
-  - from:
+  - from: # if one rule item match => allow [as OR operator]
     - ipBlock:
         cidr: 172.17.0.0/16
         except:
         - 172.17.1.0/24
-    - namespaceSelector:
+    - namespaceSelector: # both rules as the one list item => both should be matched to allow [as AND operator]
         matchLabels:
           department: db-team
+      podSelector:
+        matchLabels:
+          role: db-admin
     - podSelector:
         matchLabels:
           role: developer
     ports:
     - protocol: TCP
       port: 6379
+    - protocol: TCP
+      port: 3000
   egress: # `Egress` should be in `spec.policyTypes` fields for enabling
   - to:
     - ipBlock:
