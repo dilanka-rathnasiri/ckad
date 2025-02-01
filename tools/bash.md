@@ -1,8 +1,10 @@
 # GREP
 
-| Task        | Option |
-|-------------|--------|
-| ignore case | `-i`   |
+| Task         | Option |
+|--------------|--------|
+| Ignore case  | `-i`   |
+| After lines  | `-A N` |
+| Before lines | `-B N` |
 
 # Alias
 

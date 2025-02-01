@@ -20,7 +20,6 @@
   * volume mounts
 * Use **imperative commands** as much as possible because there's no time to edit YAML files
   * Use `kubectl run`
-  * Use `--generator` flag
 * Use the following bash aliases
   ```shell
   export ns=default
@@ -37,6 +36,10 @@
   ```
 * Bookmark most used Kubernetes document pages
 * Skip the question for later after the second troubleshooting
+* Change namespace in the kubectl context as required
+  ```shell
+  kubectl config set-context --current --namespace {{namespace}}
+  ```
 
 ## Short Names For Kubernetes Objects
 
