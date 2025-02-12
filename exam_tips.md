@@ -2,41 +2,54 @@
 
 ## Details
 
-* Time: 2 hours
-* Questions: 19
-* So, time management is critical
+- Time: 2 hours
+- Questions: 19
+- So, time management is critical
 
 ## Tips
 
-* Try to do the questions with the highest marks first
-* Try to do the easiest questions first
-* No need of answering questions sequentially
-* Note down the difficult questions with their marks in the given notepad
-* Refer Kubernetes Documentation
-* Read the instructions on the paper for coping from the Kubernetes Documentation
-* Understand:
-  * linux file systems
-  * ssh
-  * volume mounts
-* Use **imperative commands** as much as possible because there's no time to edit YAML files
-  * Use `kubectl run`
-* Use the following bash aliases
+- Try to do the questions with the highest marks first
+- Try to do the easiest questions first
+- No need of answering questions sequentially
+- Note down the difficult questions with their marks in the given notepad
+- Refer Kubernetes Documentation
+- Read the instructions on the paper for coping from the Kubernetes Documentation
+- Use **imperative commands** as much as possible because there's no time to edit YAML files
+  - Don't use imperative commands for complex configurations
+  - It makes things much harder
+- Always write text as it is in the question
+  - If the question has single quotes => write single quotes
+  - If the question has double quotes => write double quotes
+  - If the question has no quotes => don't use quotes
+- Use a separate yaml file for each resource
+  - Don't write multiple resource at same file
+  - It makes troubleshooting harder
+- Understand:
+  - linux file systems
+  - ssh
+  - volume mounts
+  - Use `kubectl run`
+- Use the following bash aliases
   ```shell
   export ns=default
-  alias k='kubectl -n $ns'
-  alias kdr= 'kubectl -n $ns -o yaml --dry-run'
+  alias k="kubectl"
+  alias kn='kubectl -n $ns'
+  export dr="--dry-run=client -o yaml"
   ```
-* Set the following vim settings
+- Set the following vim settings
   ```shell
   vim ~/.vimrc
   set nu
+  set paste
+  set hlsearch
+  set ignorecase
   set expandtab
-  set shiftwidth=2
-  set tabstop=2
+  set sw=2
+  set ts=2
   ```
-* Bookmark most used Kubernetes document pages
-* Skip the question for later after the second troubleshooting
-* Change namespace in the kubectl context as required
+- Bookmark most used Kubernetes document pages
+- Skip the question for later after the second troubleshooting
+- Change namespace in the kubectl context as required
   ```shell
   kubectl config set-context --current --namespace {{namespace}}
   ```

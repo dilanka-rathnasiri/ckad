@@ -1,5 +1,25 @@
 # Persistent Volume Claims
 
+```mermaid
+flowchart TB
+  A[Volumes] --> B
+  A --> C
+  B -.- D[Even if the pod is deleted => Volume won't be deleted]
+  C -.- E[If the pod is deleted => Volume will be also deleted]
+  subgraph B [Persistent Volumes]
+    B1[csi - Container Storage Interface]
+    B2[nfs - Network File System]
+    B3[local - local storage devices mounted on nodes]
+    B4[hostPath - a file or directory from the host node's file system]
+  end
+  subgraph C [Ephemeral Volumes]
+    C1[emptyDir]
+    C2[configMap]
+    C3[Secret]
+    C4[downward API]
+  end
+```
+
 ## Mount A Volume To A Pod
 
 ```yaml

@@ -15,6 +15,8 @@ spec:
   completions: 3
   parallelism: 3
   ttlSecondsAfterFinished: 30
+  activeDeadlineSeconds: 30 # the job will fail if it reaches 30s
+  backoffLimit: 5 # max retry attempts
   template:
     spec:
       containers:
@@ -70,6 +72,10 @@ spec:
 * `spec.backoffLimit`
   * Count of retries if pod fails
   * Default: 6
+  * Optional
+* `spec.activeDeadlineSeconds`
+  * Job lives until it reaches this deadline
+  * After the job meets the deadline => the job is failed
   * Optional
 
 ## Job types
