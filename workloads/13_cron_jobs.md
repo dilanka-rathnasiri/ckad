@@ -1,6 +1,7 @@
 # CronJobs
 
 * CronJob is a scheduled job with a cron expression
+* Short name: `cj`
 
 ## CronJob manifest file
 
@@ -10,6 +11,7 @@ kind: CronJob
 metadata:
   name: print-cronjob
 spec:
+  startingDeadlineSeconds: 7 # if the job doesn't start after 7s,job will miss
   schedule: "*/1 * * * *"
   jobTemplate:
     spec:
@@ -52,3 +54,11 @@ spec:
   * Job's template
   * Only required field `spec` of the job manifest file
   * Fields `apiVersion`, `kind`, `metadata` are excluded
+* `spec.startingDeadlineSeconds`
+  * Deadline for the starting time from the job after it schedules
+    * If the job can't start within the `startingDeadlineSeconds` time period
+      * That job will be skipped
+      * That job won't run after the `startingDeadlineSeconds`
+      * That job won't be considered as failed
+      * But that job simply won't start
+      * The next job for the next trigger will run in the next scheduled time
