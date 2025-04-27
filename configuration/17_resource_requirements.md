@@ -111,6 +111,11 @@ spec:
       type: Container
 ```
 
+* `spec.limits.[].type` can be:
+  * `Pod`
+  * `Container`
+  * `PersistentVolumeClaim`
+
 ## Key Fields In The Limit Range Manifest File
 
 * `spec.limits.[].default` => Default value for limits of the resources

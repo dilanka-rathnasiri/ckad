@@ -13,6 +13,7 @@
             * {{node ip}}**:**{{allocated port}}
     * ClusterIp
     * LoadBalancer
+* DNS name for service: `{{service name}}.{{namespace}}.svc.cluster.local`
 
 ## Service Manifest File
 
