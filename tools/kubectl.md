@@ -9,7 +9,7 @@
 | List all resources                                         | `kubectl api-resources --namespaced={{true/false}}`                           |
 | Change Namespace in kubectl context                        | `kubectl config set-context --current --namespace {{namespace}}`              |
 | Get previous instance of pod's log                         | `kubectl logs {{pod name}} -p` </br>`kubectl logs {{pod name}} --previous`    |
-| Create a pod that is deleted automatically after completed | `kubectl run {{pod name}} --rm`                                               |
+| Create a pod that is deleted automatically after completed | `kubectl run -it {{pod name}} --rm` [-it is required for --rm]                |
 | List events with the given output type and given object    | `kubectl events --types=Warning,Normal --for={{object type}}/{{object name}}` |
 | Delete object forcefully with 0 grace period               | `kubectl delete {{object type}} {{object name}} --force --grace-period=0`     |
 | Create a job from a cron job                               | `kubectl create job {{job name}} --from=cj/{{cron job name}}`                 |
