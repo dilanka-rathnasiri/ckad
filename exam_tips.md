@@ -30,13 +30,16 @@
   - volume mounts
   - Use `kubectl run`
 - Use the following bash aliases
+
   ```shell
   export ns=default
   alias k="kubectl"
   alias kn='kubectl -n $ns'
   export dr="--dry-run=client -o yaml"
   ```
+
 - Set the following vim settings
+
   ```shell
   vim ~/.vimrc
   set nu
@@ -47,9 +50,11 @@
   set sw=2
   set ts=2
   ```
+
 - Bookmark most used Kubernetes document pages
 - Skip the question for later after the second troubleshooting
 - Change namespace in the kubectl context as required
+
   ```shell
   kubectl config set-context --current --namespace {{namespace}}
   ```
@@ -67,3 +72,20 @@
 | Persistent Volumes       | pv         |
 | Persistent Volume Claims | pvc        |
 | Service Accounts         | sa         |
+| Resource Quota           | quota      |
+
+## WGET
+
+- Print result on terminal without downloading
+
+  ```shell
+  wget -O {{url}}
+  ```
+
+- Call url in web spider mode
+  - Not download the page
+  - Just check it's in there
+
+    ```shell
+    wget --spider {{url}}
+    ```
