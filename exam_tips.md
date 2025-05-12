@@ -79,7 +79,7 @@
 - Print result on terminal without downloading
 
   ```shell
-  wget -O {{url}}
+  wget -O- {{url}}
   ```
 
 - Call url in web spider mode
