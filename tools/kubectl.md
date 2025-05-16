@@ -13,6 +13,7 @@
 | List events with the given output type and given object    | `kubectl events --types=Warning,Normal --for={{object type}}/{{object name}}` |
 | Delete object forcefully with 0 grace period               | `kubectl delete {{object type}} {{object name}} --force --grace-period=0`     |
 | Create a job from a cron job                               | `kubectl create job {{job name}} --from=cj/{{cron job name}}`                 |
+| List annotations of a resource                             | `kubectl annotation {{object type}} {{object name}} --list`                   |
 
 * `--dry-run=client` option
     * Only preview the changes
