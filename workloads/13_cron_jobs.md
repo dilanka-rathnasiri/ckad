@@ -2,6 +2,10 @@
 
 * CronJob is a scheduled job with a cron expression
 * Short name: `cj`
+* Cron job will create seperate job for each shedule
+  * If the cron expression is "*/1 * * * *"
+  * Then for each and every minute there will be a sheduled execution
+  * That means in each schedule there will be a newly created job
 
 ## CronJob manifest file
 
