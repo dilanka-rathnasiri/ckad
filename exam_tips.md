@@ -73,6 +73,7 @@
 | Persistent Volume Claims | pvc        |
 | Service Accounts         | sa         |
 | Resource Quota           | quota      |
+| Endpoints                | ep         |
 
 ## WGET
 
